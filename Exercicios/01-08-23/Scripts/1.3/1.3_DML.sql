@@ -1,0 +1,48 @@
+CREATE TABLE Clinica
+(
+   IdClinica INT PRIMARY KEY IDENTITY,
+   Endereco VARCHAR(100)
+)
+
+CREATE TABLE Dono
+(
+   IdDono INT PRIMARY KEY IDENTITY,
+   Nome VARCHAR(100) NOT NULL
+)
+
+CREATE TABLE TipoPet
+(
+   IdTipoPet INT PRIMARY KEY IDENTITY,
+)
+
+
+CREATE TABLE Raca
+(
+   IdRaca INT PRIMARY KEY IDENTITY,
+)
+
+CREATE TABLE Veterinario
+(
+   IdVeterinario INT PRIMARY KEY IDENTITY,
+   IdClinica  INT FOREIGN KEY REFERENCES Clinica(IdClinica),
+   Nome VARCHAR (100),
+   CRMV VARCHAR (50)
+)
+
+CREATE TABLE Pet 
+(
+  IdPet INT PRIMARY KEY IDENTITY,
+  IdTipoPet INT FOREIGN KEY REFERENCES TipoPet (IdTipoPet),
+  IdDono INT FOREIGN KEY REFERENCES Dono (IdDono),
+  IdRaca INT FOREIGN KEY REFERENCES Raca (IdRaca),
+  Nome VARCHAR (50),
+  DatadeNascimento DATE
+)
+
+CREATE TABLE Consulta
+(
+  IdAtendimento INT PRIMARY KEY IDENTITY,
+  IdVeterinario INT FOREIGN KEY REFERENCES Veterinario (IdVeterinario),
+  IdPet INT FOREIGN KEY REFERENCES Pet (IdPet),
+  DataAtendimento DATE
+)
